@@ -85,7 +85,7 @@ $app->put(
         $product = $app->request->getJsonRawBody();
         $response = $this->mongo->products->updateOne(
             ['id' => $id],
-            ['$set' => ['name' => $product[0]->name, 'price' => $product[0]->price, 'id' => $product[0]->id]]
+            ['$set' => ['name' => $product[0]->name, 'price' => $product[0]->price]]
         );
         if ($response->getModifiedCount() > 0) {
             $event = $this->mongo->webhook->findOne(["event" => "products.update"]);

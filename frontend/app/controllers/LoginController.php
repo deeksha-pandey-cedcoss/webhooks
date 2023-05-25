@@ -22,8 +22,7 @@ class LoginController extends Controller
 
             if ($data) {
                 $this->response->redirect("webhook");
-            }
-            else {
+            } else {
                 echo "Wrong Credentials";
                 die;
             }

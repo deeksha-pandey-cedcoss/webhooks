@@ -6,7 +6,7 @@ class WebhookController extends Controller
 {
     public function indexAction()
     {
-        // return "h1";die;
+        // default action
     }
     public function webhookAction()
     {

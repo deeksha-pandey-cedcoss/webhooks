@@ -64,23 +64,20 @@ $app->post(
         ];
         $status = $collection->insertOne($arr);
 
-        return var_dump($status);
+        return $status;
     }
 );
 
 // update the movie
 $app->put(
-    '/products',
+    '/products/{id:[0-9]+}',
     function ($id) use ($app) {
-        $product = $app->request->getJsonRawBody();
-        $product = (array)$product;
-        // $product= $product[0];
-        // print_r($product[0]);die;
-        // print_r($product);
-        // die;
-        $response = $this->mongo->products->updateOne(['id' => $id], ['$set' => ['name' => $product->name, 'price' => $product->price, 'id' => $product->id]]);
-        // var_dump($product);
-        // return $response;
+        $product = json_decode(file_get_contents('php://input'));
+        $response = $this->mongo->products->updateOne(
+            ['id' => $id],
+            ['$set' => ['name' => $product[0]->name, 'price' => $product[0]->price]]
+        );
+        return $response;
     }
 );
 
